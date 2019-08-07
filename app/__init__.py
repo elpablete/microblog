@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
 # Create Flask app
 app = Flask(__name__)
@@ -20,6 +21,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 login.login_view = 'login'  # name of the login view (the name you would use in a url_for())
 
@@ -30,7 +32,7 @@ if not app.debug:
         auth = None
         if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
             auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-            
+
         secure = None
         if app.config['MAIL_USE_TLS']:
             secure = ()
